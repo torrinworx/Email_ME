@@ -1,0 +1,17 @@
+function sendEmail(){
+  var ss = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Backend");
+  var range = ss.getRange("J2:J50");
+  range.clear();
+  var n = ss.getLastRow();
+
+  for (var i =2;i<n+1; i++){
+    var emailRequired = ss.getRange(i,9).getValue();
+    var subject = ss.getRange(i,11).getValue();
+    var message = ss.getRange(i,12).getValue();
+
+    if (emailRequired=="YES") {
+      MailApp.sendEmail("Example@gmail.com",subject,message);
+      ss.getRange(i,10).setValue("YES");
+    } 
+    }
+}
